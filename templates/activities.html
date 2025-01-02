@@ -1,0 +1,218 @@
+<html>
+   <head>
+      <title> Activites - Weather App </title>
+      <script src="script.js"></script>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+      <style>
+         body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #7db9e8, #1e3c72);
+         }
+
+         .header {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+         }
+
+         .header .location {
+            font-size: 18px;
+         }
+
+         .header .search {
+            display: flex;
+            align-items: center;
+         }
+
+         .header .search input {
+            padding: 5px;
+            margin-right: 5px;
+         }
+
+         .header .search button {
+            padding: 5px;
+         }
+
+         #bannerPopup {
+            background-color: yellow;
+            color: black;
+            padding: 15px;
+            font-size: larger;
+            text-align: center;
+            width: 50%;
+            font-weight: bold;
+            font-stretch: expanded;
+            position: fixed;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid black;
+            border-radius: 5px;
+            z-index: 1000;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+         }
+
+         .tabs {
+            display: flex;
+            justify-content: center;
+            background-color: #d3d3d3;
+         }
+
+         .tabs button {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background-color: #00008b;
+            font-size: 16px;
+            cursor: pointer;
+         }
+
+         .tabs button.active {
+            background-color: #3b6acf;
+         }
+
+         .tablink {
+            background-color: #555;
+            color: white;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            font-size: 17px;
+            width: 25%;
+         }
+
+         /* Change background color of buttons on hover */
+         .tablink:hover {
+            background-color: #3b6acf;
+         }
+
+         /* Set default styles for tab content */
+         .tabcontent {
+            color: white;
+            display: none;
+            padding: 50px;
+            text-align: center;
+         }
+
+         .content {
+            text-align: center;
+            padding: 20px;
+         }
+
+         .content h2 {
+            color: #000;
+         }
+
+         .cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+         }
+
+         .card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            height: 200px;
+            text-align: center;
+            padding: 3%;
+         }
+
+         .card img {
+            width: 50px;
+            height: 50px;
+         }
+
+         .card h3 {
+            font-size: 20px;
+            margin: 10px 0;
+         }
+
+         .card p {
+            font-size: 18px;
+            color: #666;
+         }
+
+         .card .highlight {
+            display: block;
+            height: 4px;
+            width: 50px;
+            margin: 10px auto;
+         }
+
+         .highlight-yellow {
+            background-color: #ff0;
+         }
+
+         .highlight-green {
+            background-color: #0f0;
+         }
+
+         .highlight-red {
+            background-color: #f00;
+         }
+
+         @media (max-width: 768px) {
+            .cards {
+               flex-direction: column;
+               align-items: center;
+            }
+         }
+      </style>
+   </head>
+   <body>
+      <div class="header">
+         <div class="location">
+            <span style="font-size: large; font:bold;"> Shah Alam, Selangor 28°C </span>
+         </div>
+         <div class="search">
+            <input type="text" placeholder="Address, City or Zip Code">
+            <button type="submit">
+               <i class="fa fa-search"></i>
+            </button>
+         </div>
+      </div>
+      <!-- <div id="overlay"></div> -->
+      <div id="bannerPopup"> WEBSITE APPS SPECIALLY FOR FARMERS!! <button onclick="closeBannerPopup()" style="margin-left: 35%; color: white; background-color: black;">✕</button>
+      </div>
+      <div class="tabs">
+         <button class="tablink" onclick="window.location.href='landing.html'" id="defaultOpen">TODAY</button>
+         <button class="tablink" onclick="window.location.href='hourly.html'" id="defaultOpen">HOURLY</button>
+         <button class="tablink" onclick="window.location.href='day.html'" id="defaultOpen">DAILY</button>
+         <button class="tablink" onclick="window.location.href='monthly.html'" id="defaultOpen">MONTHLY</button>
+         <button class="tablink active" onclick="window.location.href='activities.html'" id="defaultOpen">ACTIVITIES</button>
+      </div>
+      
+      <div class="content">
+         <h2> What should I do today? </h2>
+         <div class="cards">
+            <div class="card">
+               <img alt="Planting and Sowing icon" height="50" src="https://storage.googleapis.com/a1aa/image/HsZRweOgY7wSQCPcHOhYksuZLeQYw0fNl4omU2cRUrhfZScPB.jpg" width="50" />
+               <h3> Planting and Sowing </h3>
+               <span class="highlight highlight-yellow"></span>
+               <p> Good weather for planting </p>
+            </div>
+            <div class="card">
+               <img alt="Irrigation Planning icon" height="50" src="https://storage.googleapis.com/a1aa/image/poeVvL6BWJyUIanJrK2DAj94aqgVePeDD9iWS6jPPDPBNJunA.jpg" width="50" />
+               <h3> Irrigation Planning </h3>
+               <span class="highlight highlight-green"></span>
+               <p> The best day to plan irrigation schedules </p>
+            </div>
+            <div class="card">
+               <img alt="Pest and Disease Management icon" height="50" src="https://storage.googleapis.com/a1aa/image/tprr8PKE9qIYGxH7MwNucTdt98dwWA9VfpHdTgEGbX2QTi7JA.jpg" width="50" />
+               <h3> Pest and Disease Management </h3>
+               <span class="highlight highlight-red"></span>
+               <p> Not recommended to apply pesticides because of expected rain </p>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

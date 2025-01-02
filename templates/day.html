@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Day - Weather App</title>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/day.css') }}">
+      <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   </head>
+   <body>
+      <div class="header">
+          <div class="location">
+              {% if weather %}
+                  <span style="font-size: large; font:bold;">
+                      {{ weather.name }} , {{ weather.temp_c }}°C / {{ weather.temp_f }}°F
+                  </span>
+              {% else %}
+                  <span>No weather data available.</span>
+              {% endif %}
+          </div>
+            <div class="search">
+               <form action="/day" method="POST" class="text-center">
+                   <input type="text" name="cityName" placeholder="Enter city" class="form-control" value="{{ session.get('location', '') }}" required>
+                   <button type="submit">
+                       <i class="fa fa-search"></i>
+                   </button>
+               </form>
+           </div>
+        </div>
+      <div id="bannerPopup"> WEBSITE APPS SPECIALLY FOR FARMERS!! <button onclick="closeBannerPopup()" style="margin-left: 35%; color: white; background-color: black;">✕</button>
+      </div>
+      <div class="tabs">
+         <button class="tablink" onclick="window.location.href='/home' "id="defaultOpen">TODAY</button>
+          <button class="tablink" onclick="window.location.href='/hourly'" id="defaultOpen">HOURLY</button>
+          <button class="tablink active" onclick="window.location.href='/day'" id="defaultOpen">DAILY</button>
+          <button class="tablink" onclick="window.location.href='/monthly'" id="defaultOpen">MONTHLY</button>
+      </div>
+      <div class="content">
+          {% if error %}
+              <!-- <h1 style="color: red; background-color: rgb(255, 255, 255);">Access Restricted</h1> -->
+              <h1 style="color:beige;">{{ error }}</h1>
+          {% else %}
+              <h1 style="color: rgb(255, 255, 255);">Daily Page - Day</h1>
+              <div class="weather-card">
+                  <div class="date">
+                      <div>
+                          <div> {{ weather.day }} </div>
+                          <div> {{ weather.date }} </div>
+                      </div>
+                      <div>
+                          <div> {{ weather.current_time }} </div>
+                          <div style="font-size: 24px;">{{ weather.temp_c }}°C</div>
+                      </div>
+                  </div>
+                  <div class="condition">
+                      <div> {{ weather.condition_text }}</div>
+                  </div>
+                  <div class="details">
+                      <div>
+                          <span> Feels Like </span>
+                          <span> {{ weather.feelslike_c }}°C </span>
+                      </div>
+                      <div>
+                          <span> Wind </span>
+                          <span> {{ weather.wind_speed_kph }} kph </span>
+                      </div>
+                      <div>
+                          <span> Cloud Cover </span>
+                          <span> {{ weather.cloud_coverage}} % </span>
+                      </div>
+                      <div>
+                          <span> Wind Gusts </span>
+                          <span> {{ weather.gust_kph}} km/h </span>
+                      </div>
+                      <div>
+                        <span>Visibility </span>
+                        <span> {{ weather.visibility_km }} km</span>
+                    </div>
+                    <div>
+                     <span> Humidity </span>
+                     <span> {{ weather.humidity }} % </span>
+                    </div>
+                      <div>
+                          <span> Probability of Thunderstorms </span>
+                          <span> 6% </span>
+                      </div>
+                      <div>
+                          <span> Probability of Precipitation </span>
+                          <span> 25% </span>
+                      </div>
+                  </div>
+              </div>
+          {% endif %}
+      </div>
+      <div class="footer-night">
+          <button class="footer-night" onclick="window.location.href='/night'" id="defaultOpen">NIGHT</button>
+          <i class="fas fa-chevron-right"></i>
+      </div>
+      <br>
+      <div class="footer">
+         <div>
+            <h3> Basic Information </h3>
+            <ul>
+               <li> Copyright Notice: © 2024 WeatherWise. All Rights Reserved. </li>
+            </ul>
+         </div>
+         <div>
+            <h3> Navigation Links </h3>
+            <ul>
+               <a href="hourly.html">Hourly</a>
+               <li>
+                  <a href="day.html">Daily</a>
+               </li>
+               <li>
+                  <a href="monthly.html">Monthly</a>
+               </li>
+               <li>
+                  <a href="activities.html">Activites</a>
+               </li>
+            </ul>
+         </div>
+         <div>
+            <h3> Company Information </h3>
+            <ul>
+               <li> Contact us at support@weatherwise.com </li>
+            </ul>
+         </div>
+         <div>
+            <h3> Social Media Links </h3>
+            <ul>
+               <li>
+                  <i class="fab fa-facebook-f"></i> Facebook
+               </li>
+               <li>
+                  <i class="fab fa-twitter"></i> Twitter
+               </li>
+               <li>
+                  <i class="fab fa-instagram"></i> Instagram
+               </li>
+               <li>
+                  <i class="fab fa-linkedin-in"></i> LinkedIn
+               </li>
+            </ul>
+         </div>
+      </div>
+      <div class="scroll-up">
+         <i class="fas fa-arrow-up"></i>
+     </div>
+   </body>
+</html>

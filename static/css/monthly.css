@@ -1,0 +1,274 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #7db9e8, #1e3c72);
+}
+
+/* Spacing for the main layout */
+.header {
+  background-color: #000;
+  color: #fff;
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+
+.header .location {
+  font-size: 18px;
+  padding-left: 25px;
+}
+
+.header .search {
+  display: flex;
+  align-items: center;
+  padding-right: 25px;
+}
+
+.header .search input {
+  padding: 5px;
+  margin-right: 5px;
+}
+
+.header .search button {
+  padding: 5px;
+}
+
+#bannerPopup {
+  background-color: yellow;
+  color: black;
+  padding: 15px;
+  font-size: larger;
+  text-align: center;
+  width: 50%;
+  font-weight: bold;
+  position: fixed;
+  top: 50px; 
+  left: 50%;
+  transform: translate(-50%, 0);
+  border: 2px solid black;
+  border-radius: 5px;
+  z-index: 1000;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  background-color: #d3d3d3;
+  width: 100%;
+  position: fixed;
+  top: 67px; /* Adjust to avoid overlapping with banner */
+  z-index: 900;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 15px;
+  border: none;
+  background-color: #00008b;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.tabs button.active {
+  background-color: #3b6acf;
+}
+
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+}
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #a0c4ff, #3b82f6);
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.calendar {
+    width: 80%;
+    max-width: 800px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+.month-year {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.month-btn {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.month-btn:hover {
+    background: #2563eb;
+}
+
+.calendar table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#current-month {
+  font-size: 24px; /* Bigger size */
+  font-weight: bold; /* Bold text */
+}
+
+.calendar th,
+.calendar td {
+    border: 1px solid #d1d5db;
+    padding: 10px;
+    text-align: center;
+    vertical-align: top;
+    height: 100px;
+    position: relative;
+    font-size: 21px;
+}
+
+.calendar .date {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.calendar .weather-info {
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.calendar .weather-icon {
+    font-size: 16px;
+    margin-top: 5px;
+    display: block;
+}
+
+.calendar td:hover {
+    background-color: #d1d5db;
+}
+
+.selected {
+    background: #2563eb;
+    color: white;
+}
+
+.header {
+  background-color: #000;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header .location {
+ font-size: 18px;
+}
+.header .search {
+ display: flex;
+ align-items: center;
+}
+.header .search input {
+ padding: 5px;
+ margin-right: 5px;
+}
+.header .search button {
+ padding: 5px;
+}
+
+#bannerPopup {
+ background-color: yellow; 
+ color: black; 
+ padding: 15px; 
+ font-size: larger;
+ text-align: center; 
+ width: 50%; 
+ font-weight: bold;
+ font-stretch: expanded;
+ position: fixed;
+ left: 50%; 
+ transform: translate(-50%, -50%); 
+ border: 2px solid black; 
+ border-radius: 5px; 
+ z-index: 1000; 
+ box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  background-color: #d3d3d3;
+}
+.tabs button {
+  flex: 1;
+  padding: 15px;
+  border: none;
+  background-color: #00008b;
+  font-size: 16px;
+  cursor: pointer;
+}
+.tabs button.active {
+  background-color: #3b6acf;
+}
+
+.tablink {
+ background-color: #555;
+ color: white;
+ float: left;
+ border: none;
+ outline: none;
+ cursor: pointer;
+ padding: 14px 16px;
+ font-size: 17px;
+ width: 25%;
+}
+
+/* Change background color of buttons on hover */
+.tablink:hover {
+ background-color: #3b6acf;
+}
+
+/* Set default styles for tab content */
+.tabcontent {
+ color: white;
+ display: none;
+ padding: 50px;
+ text-align: center;
+}
+

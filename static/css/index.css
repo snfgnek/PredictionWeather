@@ -1,0 +1,253 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #7db9e8, #1e3c72);
+}
+
+.header {
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .location {
+    font-size: 18px;
+}
+
+.header .search {
+    display: flex;
+    align-items: center;
+}
+
+.header .search input {
+    padding: 5px;
+    margin-right: 5px;
+}
+
+.header .search button {
+    padding: 5px;
+}
+
+#bannerPopupIndex {
+    background-color: rgb(25, 100, 25);
+    color: rgb(255, 255, 255);
+    padding: 15px;
+    font-size: larger;
+    text-align: center;
+    width: 50%;
+    font-weight: bold;
+    font-stretch: expanded;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid black;
+    border-radius: 5px;
+    z-index: 1000;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    background-color: #d3d3d3;
+}
+
+.tabs button {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    background-color: #00008b;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.tabs button.active {
+    background-color: #3b6acf;
+}
+
+.tablink {
+    background-color: #555;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 17px;
+    width: 25%;
+}
+
+/* Change background color of buttons on hover */
+.tablink:hover {
+    background-color: #3b6acf;
+}
+
+/* Set default styles for tab content */
+.tabcontent {
+    color: white;
+    display: none;
+    padding: 50px;
+    text-align: center;
+}
+
+.map {
+    width: 100%;
+    height: 210px;
+    background: url('https://placehold.co/800x200') no-repeat center center;
+    background-size: cover;
+}
+
+.mapouter {
+    position: relative;
+    text-align: right;
+    width: 100%;
+    height: 353px;
+}
+
+.gmap_canvas {
+    overflow: hidden;
+    background: none !important;
+    width: 100%;
+    height: 400px;
+}
+
+.gmap_iframe {
+    height: 353px !important;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    padding-top: 170px;
+}
+
+.content .forecast {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 55%;
+}
+
+.content .forecast .title {
+    display: flex;
+    font-weight: 500;
+    justify-content: space-between;
+    border-bottom: 1px solid #000;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.content .forecast .details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 50px;
+}
+
+.content .forecast .details .forecast-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 175px;
+    padding-left: 40px;
+    align-items: center;
+}
+
+.content .forecast .details .time .hourly-forecast {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 170px;
+}
+
+.content .forecast .details .time.today {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content .forecast .details .time {
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.time div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content .forecast .details .time img {
+    width: 65px;
+    height: 65px;
+    display: flex;
+}
+
+.content .weather {
+    background-image: url(img/Weather.jpg);
+    /* background-color: #7db9e8; */
+    padding: 20px;
+    border-radius: 5px;
+    width: 40%;
+    text-align: center;
+}
+
+.content .weather .temp {
+    font-size: 28px;
+    margin: 10px 0;
+}
+
+.content .weather .details {
+    display: flex;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    justify-content: space-around;
+    margin-top: 70px;
+}
+
+a {
+    color: white;
+    /* Custom color code */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #00d9ff;
+    /* Custom hover color */
+}
+
+.footer {
+    background-color: #00008b;
+    color: #fff;
+    padding: 35px;
+    display: flex;
+    justify-content: center;
+}
+
+.footer div {
+    width: 30%;
+}
+
+.footer div ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer div ul li {
+    margin: 5px 0;
+}
+
+.scroll-up {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: yellow;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+}

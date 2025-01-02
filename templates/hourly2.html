@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Hourly Weather</title>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+      <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/hourly.css') }}">
+      <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   </head>
+   <body>
+      <div class="header">
+         <div class="location"> {% if weather %} <span style="font-size: large; font:bold;">
+               {{ weather.name }} , {{ weather.temp_c }}°C / {{ weather.temp_f }}°F </span> {% else %} <span>No weather data available.</span> {% endif %} </div>
+         <div class="search">
+            <form action="/hourly" method="POST" class="text-center">
+               <input type="text" name="cityName" placeholder="Enter city" class="form-control" value="{{ session.get('location', '') }}" required>
+               <button type="submit">
+                  <i class="fa fa-search"></i>
+               </button>
+            </form>
+         </div>
+      </div>
+      <div id="bannerPopup"> WEBSITE APPS SPECIALLY FOR FARMERS!! <button onclick="closeBannerPopup()" style="margin-left: 35%; color: white; background-color: black;">✕</button>
+      </div>
+      <!-- Tabs Section -->
+      <div class="tabs">
+         <button class="tablink" onclick="window.location.href='/home' " id="defaultOpen">TODAY</button>
+         <button class="tablink active" onclick="window.location.href='/hourly'" id="defaultOpen">HOURLY</button>
+         <button class="tablink " onclick="window.location.href='/day'" id="defaultOpen">DAILY</button>
+         <button class="tablink" onclick="window.location.href='/monthly'" id="defaultOpen">MONTHLY</button>
+      </div>
+      <div class="content"> {% if error %}
+         <!-- <h1 style="color: red; background-color: rgb(255, 255, 255);">Access Restricted</h1> -->
+         <h1 style="color:beige;">{{ error }}</h1> {% else %} 
+         <h1 style="color: rgb(29, 26, 26); align-items: center;">Hourly Page - {{ weather.name }}</h1>
+         <div class="weather-hourly">
+            <div class="weather-card">
+               <table class="fold-table">
+                  <tbody>
+                     <tr class="view">
+                        <td class="time">NOW</td>
+                        <td class="temp">{{ weather.temp_c }}</td>
+                        <td class="cur"> <img src="{{ weather.condition_icon }}" alt="Weather icon" /> </td>
+                     </tr>
+                     <tr class="fold">
+                        <td colspan="7">
+                           <div class="fold-content">
+                              <h3>{{ weather.current_time }} </h3>
+                              <p>{{ weather.condition_text }}</p>
+                              <table class="small-friendly">
+                                 <tr>
+                                    <th>Feels Like</th>
+                                    <th>Wind Speed</th>
+                                    <th>Humidity</th>
+                                    <th>Cloud Cover</th>
+                                    <th>Rain Amount</th>
+                                    <th>Precipitation </th>
+                                    <th>Visibility</th>
+                                 </tr>
+                                 <tr>
+                                    <td>{{ weather.feelslike_c }}°C</td>
+                                    <td>{{ weather.wind_speed_kph }} km/h</td>
+                                    <td>{{ weather.humidity }} %</td>
+                                    <td>{{ weather.cloud_coverage }} %</td>
+                                    <td>{{ weather.rain_1h_mm}} mm/h</td>
+                                    <td>{{ weather.precipitation_mode}}</td>
+                                    <td>{{ weather.visibility_km }} km</td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+
+                     <tr class="view">
+                        <td>Prediction:</td>
+                        <td><img src="{{ weather.icon_code }}" alt="Weather Icon"></td>
+                    </tr>
+                    
+                     <!-- Row -->
+                     <tr class="view">
+                        <td class="time">{{ weather.current_time }} </td>
+                        <td class="temp">{{ weather.temp_c }}</td>
+                        <td class="cur"> <img src="{{ weather.condition_icon }}" alt="Weather icon" /></td>
+                     </tr>
+                     <tr class="fold">
+                        <td colspan="7">
+                           <div class="fold-content">
+                              <h3>{{ weather.current_time }} </h3>
+                              <p>{{ weather.condition_text }}</p>
+                              <table class="small-friendly">
+                                <tr>
+                                   <th>Feels Like</th>
+                                   <th>Wind Speed</th>
+                                   <th>Humidity</th>
+                                   <th>Cloud Cover</th>
+                                   <th>Rain Amount</th>
+                                   <th>Precipitation </th>
+                                   <th>Visibility</th>
+                                </tr>
+                                <tr>
+                                   <td>{{ weather.feelslike_c }}°C</td>
+                                   <td>{{ weather.wind_speed_kph }} km/h</td>
+                                   <td>{{ weather.humidity }} %</td>
+                                   <td>{{ weather.cloud_coverage }} %</td>
+                                   <td>{{ weather.rain_1h_mm}} mm/h</td>
+                                   <td>{{ weather.precipitation_mode}}</td>
+                                   <td>{{ weather.visibility_km }} km</td>
+                                </tr>
+                             </table>
+                           </div>
+                        </td>
+                     </tr>
+                     <!-- Row -->
+                     <tr class="view">
+                        <td  class="time">{{ weather.current_time }}  </td>
+                        <td class="temp">{{ weather.temp_c }}</td>
+                        <td class="cur"><img src="{{ weather.condition_icon }}" alt="Weather icon" /></td>
+                     </tr>
+                     <tr class="fold">
+                        <td colspan="7">
+                           <div class="fold-content">
+                              <h3>{{ weather.current_time }}  </h3>
+                              <p>{{ weather.condition_text }}</p>
+                              <table class="small-friendly">
+                                 <tr>
+                                    <th>Feels Like</th>
+                                    <th>Wind</th>
+                                    <th>Humidity</th>
+                                    <th>UV Index</th>
+                                    <th>Cloud Cover</th>
+                                    <th>Rain Amount</th>
+                                    <th>Visibility</th>
+                                 </tr>
+                                 <tr>
+                                    <td>28°C</td>
+                                    <td>ESE 6km/h</td>
+                                    <td>78%</td>
+                                    <td>1 of 11</td>
+                                    <td>68%</td>
+                                    <td>0.01 in</td>
+                                 </tr>
+                              </table>
+                     <tr class="view">
+                        <td class="time">{{ weather.current_time }}  </td>
+                        <td class="temp">{{ weather.temp_c }}</td>
+                        <td class="cur"><img src="{{ weather.condition_icon }}" alt="Weather icon" /> </td>
+                     </tr>
+                     <tr class="fold">
+                        <td colspan="7">
+                           <div class="fold-content">
+                              <h3>{{ weather.current_time }}  </h3>
+                              <p> {{ weather.condition_text }}</p>
+                              <table class="small-friendly">
+                                 <tr>
+                                    <th>Feels Like</th>
+                                    <th>Wind</th>
+                                    <th>Humidity</th>
+                                    <th>UV Index</th>
+                                    <th>Cloud Cover</th>
+                                    <th>Rain Amount</th>
+                                    <th>Visibility</th>
+                                 </tr>
+                                 <tr>
+                                    <td>28°C</td>
+                                    <td>ESE 6km/h</td>
+                                    <td>78%</td>
+                                    <td>1 of 11</td>
+                                    <td>68%</td>
+                                    <td>0.01 in</td>
+                                 </tr>
+                              </table>
+                     <tr class="view">
+                        <td class="time">{{ weather.current_time }} Time</td>
+                        <td class="temp">{{ weather.temp_c }}</td>
+                        <td class="cur"><img src="{{ weather.condition_icon }}" alt="Weather icon" /></td>
+                     </tr>
+                     <tr class="fold">
+                        <td colspan="7">
+                           <div class="fold-content">
+                              <h3>{{ weather.current_time }}  </h3>
+                              <p><img src="{{ weather.condition_icon }}" alt="Weather icon" /></p>
+                              <table class="small-friendly">
+                                 <tr>
+                                    <th>Feels Like</th>
+                                    <th>Wind</th>
+                                    <th>Humidity</th>
+                                    <th>UV Index</th>
+                                    <th>Cloud Cover</th>
+                                    <th>Rain Amount</th>
+                                    <th>Visibility</th>
+                                 </tr>
+                                 <tr>
+                                    <td>28°C</td>
+                                    <td>ESE 6km/h</td>
+                                    <td>78%</td>
+                                    <td>1 of 11</td>
+                                    <td>68%</td>
+                                    <td>0.01 in</td>
+                                 </tr>
+                              </table>
+                     <tr class="view">
+                        <td class="time">{{ weather.current_time }}</td>
+                        <td class="temp">{{ weather.temp_c }}</td>
+                        <td class="cur"><img src="{{ weather.condition_icon }}" alt="Weather icon" /></td>
+                     </tr>
+                     <tr class="fold">
+                        <td colspan="7">
+                           <div class="fold-content">
+                              <h3>{{ weather.current_time }} </h3>
+                              <p><img src="{{ weather.condition_icon }}" alt="Weather icon" /></p>
+                              <table class="small-friendly">
+                                 <tr>
+                                    <th>Feels Like</th>
+                                    <th>Wind</th>
+                                    <th>Humidity</th>
+                                    <th>UV Index</th>
+                                    <th>Cloud Cover</th>
+                                    <th>Rain Amount</th>
+                                    <th>Visibility</th>
+                                 </tr>
+                                 <tr>
+                                    <td>28°C</td>
+                                    <td>ESE 6km/h</td>
+                                    <td>78%</td>
+                                    <td>1 of 11</td>
+                                    <td>68%</td>
+                                    <td>0.01 in</td>
+                                 </tr>
+                              </table>
+                     <tr class="view">
+                        <td class="time">{{ weather.current_time }}</td>
+                        <td class="temp">{{ weather.temp_c }}</td>
+                        <td class="cur"><img src="{{ weather.condition_icon }}" alt="Weather icon" /></td>
+                     </tr>
+                     <tr class="fold">
+                        <td colspan="7">
+                           <div class="fold-content">
+                              <h3>{{ weather.current_time }}</h3>
+                              <p><img src="{{ weather.condition_icon }}" alt="Weather icon" /></p>
+                              <table class="small-friendly">
+                                 <tr>
+                                    <th>Feels Like</th>
+                                    <th>Wind</th>
+                                    <th>Humidity</th>
+                                    <th>UV Index</th>
+                                    <th>Cloud Cover</th>
+                                    <th>Rain Amount</th>
+                                    <th>Visibility</th>
+                                 </tr>
+                                 <tr>
+                                    <td>28°C</td>
+                                    <td>ESE 6km/h</td>
+                                    <td>78%</td>
+                                    <td>1 of 11</td>
+                                    <td>68%</td>
+                                    <td>0.01 in</td>
+                                 </tr>
+                              </table>
+                     <tr class="view">
+                        <td class="time">{{ weather.current_time }}</td>
+                        <td class="temp">{{ weather.temp_c }}</td>
+                        <td class="cur"><img src="{{ weather.condition_icon }}" alt="Weather icon" /></td>
+                     </tr>
+                     <tr class="fold">
+                        <td colspan="7">
+                           <div class="fold-content">
+                              <h3>{{ weather.current_time }}</h3>
+                              <p><img src="{{ weather.condition_icon }}" alt="Weather icon" /></p>
+                              <table class="small-friendly">
+                                 <tr>
+                                    <th>Feels Like</th>
+                                    <th>Wind</th>
+                                    <th>Humidity</th>
+                                    <th>UV Index</th>
+                                    <th>Cloud Cover</th>
+                                    <th>Rain Amount</th>
+                                    <th>Visibility</th>
+                                 </tr>
+                                 <tr>
+                                    <td>28°C</td>
+                                    <td>ESE 6km/h</td>
+                                    <td>78%</td>
+                                    <td>1 of 11</td>
+                                    <td>68%</td>
+                                    <td>0.01 in</td>
+                                 </tr>
+                              </table>
+                     <tr class="view">
+                        <td class="time">{{ weather.current_time }}</td>
+                        <td class="temp">{{ weather.temp_c }}</td>
+                        <td class="cur"><img src="{{ weather.condition_icon }}" alt="Weather icon" /></td>
+                     </tr>
+                     <tr class="fold">
+                        <td colspan="7">
+                           <div class="fold-content">
+                              <h3>{{ weather.current_time }}</h3>
+                              <p><img src="{{ weather.condition_icon }}" alt="Weather icon" /></p>
+                              <table class="small-friendly">
+                                 <tr>
+                                    <th>Feels Like</th>
+                                    <th>Wind</th>
+                                    <th>Humidity</th>
+                                    <th>UV Index</th>
+                                    <th>Cloud Cover</th>
+                                    <th>Rain Amount</th>
+                                    <th>Visibility</th>
+                                 </tr>
+                                 <tr>
+                                    <td>28°C</td>
+                                    <td>ESE 6km/h</td>
+                                    <td>78%</td>
+                                    <td>1 of 11</td>
+                                    <td>68%</td>
+                                    <td>0.01 in</td>
+                                 </tr>
+                              </table>
+                     <tr class="view">
+                        <td class="time">{{ weather.current_time }}</td>
+                        <td class="temp">{{ weather.temp_c }}</td>
+                        <td class="cur"><img src="{{ weather.condition_icon }}" alt="Weather icon" /></td>
+                     </tr>
+                     <tr class="fold">
+                        <td colspan="7">
+                           <div class="fold-content">
+                              <h3>{{ weather.current_time }}</h3>
+                              <p><img src="{{ weather.condition_icon }}" alt="Weather icon" /></p>
+                              <table class="small-friendly">
+                                 <tr>
+                                    <th>Feels Like</th>
+                                    <th>Wind</th>
+                                    <th>Humidity</th>
+                                    <th>UV Index</th>
+                                    <th>Cloud Cover</th>
+                                    <th>Rain Amount</th>
+                                    <th>Visibility</th>
+                                 </tr>
+                                 <tr>
+                                    <td>28°C</td>
+                                    <td>ESE 6km/h</td>
+                                    <td>78%</td>
+                                    <td>1 of 11</td>
+                                    <td>68%</td>
+                                    <td>0.01 in</td>
+                                 </tr>
+                              </table>
+                     <tr class="view">
+                        <td class="time">{{ weather.current_time }}</td>
+                        <td class="temp">{{ weather.temp_c }}</td>
+                        <td class="cur"><img src="{{ weather.condition_icon }}" alt="Weather icon" /></td>
+                     </tr>
+                     <tr class="fold">
+                        <td colspan="7">
+                           <div class="fold-content">
+                              <h3>{{ weather.current_time }}</h3>
+                              <p><img src="{{ weather.condition_icon }}" alt="Weather icon" /></p>
+                              <table class="small-friendly">
+                                 <tr>
+                                    <th>Feels Like</th>
+                                    <th>Wind</th>
+                                    <th>Humidity</th>
+                                    <th>UV Index</th>
+                                    <th>Cloud Cover</th>
+                                    <th>Rain Amount</th>
+                                    <th>Visibility</th>
+                                 </tr>
+                                 <tr>
+                                    <td>28°C</td>
+                                    <td>ESE 6km/h</td>
+                                    <td>78%</td>
+                                    <td>1 of 11</td>
+                                    <td>68%</td>
+                                    <td>0.01 in</td>
+                                 </tr>
+                              </table>
+                     <tr class="view">
+                        <td class="time">{{ weather.current_time }} Time</td>
+                        <td class="temp">{{ weather.temp_c }}</td>
+                        <td class="cur"><img src="{{ weather.condition_icon }}" alt="Weather icon" /></td>
+                     </tr>
+                     <tr class="fold">
+                        <td colspan="7">
+                           <div class="fold-content">
+                              <h3>{{ weather.current_time }} Time</h3>
+                              <p><img src="{{ weather.condition_icon }}" alt="Weather icon" /></p>
+                              <table class="small-friendly">
+                                 <tr>
+                                    <th>Feels Like</th>
+                                    <th>Wind</th>
+                                    <th>Humidity</th>
+                                    <th>UV Index</th>
+                                    <th>Cloud Cover</th>
+                                    <th>Rain Amount</th>
+                                    <th>Visibility</th>
+                                 </tr>
+                                 <tr>
+                                    <td>28°C</td>
+                                    <td>ESE 6km/h</td>
+                                    <td>78%</td>
+                                    <td>1 of 11</td>
+                                    <td>68%</td>
+                                    <td>0.01 in</td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table> {% endif %}
+            </div>
+         </div>
+         <div class="footer">
+            <div>
+               <h3> Basic Information </h3>
+               <ul>
+                  <li> Copyright Notice: © 2024 WeatherWise. All Rights Reserved. </li>
+               </ul>
+            </div>
+            <div>
+               <h3> Navigation Links </h3>
+               <ul>
+                  <a href="hourly.html">Hourly</a>
+                  <li>
+                     <a href="day.html">Daily</a>
+                  </li>
+                  <li>
+                     <a href="monthly.html">Monthly</a>
+                  </li>
+                  <li>
+                     <a href="activities.html">Activites</a>
+                  </li>
+               </ul>
+            </div>
+            <div>
+               <h3> Company Information </h3>
+               <ul>
+                  <li> Contact us at support@weatherwise.com </li>
+               </ul>
+            </div>
+            <div>
+               <h3> Social Media Links </h3>
+               <ul>
+                  <li>
+                     <i class="fab fa-facebook-f"></i> Facebook
+                  </li>
+                  <li>
+                     <i class="fab fa-twitter"></i> Twitter
+                  </li>
+                  <li>
+                     <i class="fab fa-instagram"></i> Instagram
+                  </li>
+                  <li>
+                     <i class="fab fa-linkedin-in"></i> LinkedIn
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="scroll-up">
+            <i class="fas fa-arrow-up"></i>
+         </div>
+   </body>
+   <script>
+      $(function() {
+         $(".fold-table tr.view").on("click", function() {
+            if ($(this).hasClass("open")) {
+               $(this).removeClass("open").next(".fold").removeClass("open");
+            } else {
+               $(".fold-table tr.view").removeClass("open").next(".fold").removeClass("open");
+               $(this).addClass("open").next(".fold").addClass("open");
+            }
+         });
+      });
+   </script>
+</html>

@@ -1,0 +1,362 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #7db9e8, #1e3c72);
+}
+.header {
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header .location {
+    display: flex;
+    align-items: center;
+}
+.header .location span {
+    margin-left: 10px;
+}
+.header .search {
+    display: flex;
+    align-items: center;
+}
+.header .search input {
+    padding: 5px;
+    margin-right: 5px;
+}
+.header .search button {
+    padding: 5px;
+}
+#bannerPopup {
+    background-color: yellow;
+    color: black;
+    padding: 15px;
+    font-size: larger;
+    text-align: center;
+    width: 50%;
+    font-weight: bold;
+    font-stretch: expanded;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid black;
+    border-radius: 5px;
+    z-index: 1000;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+.tabs {
+    display: flex;
+    justify-content: center;
+    background-color: #d3d3d3;
+ }
+
+ .tabs button {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    background-color: #00008b;
+    font-size: 16px;
+    cursor: pointer;
+ }
+
+ .tabs button.active {
+    background-color: #3b6acf;
+ }
+
+ .tablink {
+    background-color: #555;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 17px;
+    width: 25%;
+ }
+
+ .tablink:hover {
+    background-color: #3b6acf;
+ }
+
+.tabs .active {
+    background-color: #333;
+}
+
+ .content h1 {
+    padding: 10px 370px;
+ }
+ .weather-hourly {
+    padding-left: 120px;
+    padding-right: 120px;
+ }
+ .weather-card {
+    background-color: #fff;
+    border: 1px solid #000;
+    padding: 40px;
+    margin-left: 15%;
+    margin-bottom: 50px;
+    width: 70%;
+ }
+.weather-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+.weather-row:last-child {
+    border-bottom: none;
+}
+.time, .temp, .desc {
+    font-weight: bold;
+}
+.details {
+    display: flex;
+    align-items: center;
+}
+.details img {
+    margin-right: 10px;
+}
+table {
+    /* width: 100%; */
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.9em;
+    align-items: center;
+}
+table td {
+    border: 1px solid #ccc;
+    text-align: center;
+    padding: 8px;
+    font-size: large;
+    font-family: sans-serif;
+}
+table .td .temp{
+    padding: 8px;
+    font-size: large;
+}
+table th {
+    background-color: #4a90e2;
+    color: white;
+    text-align: center;
+    padding: 8px;
+    font-weight: bold;
+}
+.weather-table th, .weather-table td {
+    border: 1px solid #ccc;
+}
+.footer {
+    background-color: #00008b;
+    color: #fff;
+    padding: 35px;
+    display: flex;
+    padding-bottom: 3%;
+    width: 100%
+ }
+
+ .footer div {
+    width: 30%;
+ }
+
+ .footer div ul {
+    list-style: none;
+    padding: 0;
+ }
+
+ .footer div ul li {
+    margin: 5px 0;
+ }
+
+ a {
+    color: white;
+    /* Custom color code */
+    text-decoration: none;
+ }
+
+ a:hover {
+    color: #00d9ff;
+    /* Custom hover color */
+ }
+ .scroll-up {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: yellow;
+        border-radius: 50%;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+/* test */
+/* Table Colors */
+:root {
+--tbl-txt: #555;
+--tbl-bg: white;
+--tbl-odd-bg: #eee;
+--tbl-hover-bg: #ddd;
+--tbl-border: #ccc;
+--tbl-active-bg: tomato;
+--tbl-active-txt: white;
+}
+
+.time, 
+.cur, 
+.per { white-space: nowrap;}
+.temp:after { content: " °C"; font-size: large;}
+/* .cur:after { content: "$"; font-size: large;} */
+.per:after { content: "%"; font-size: large;}
+
+/* General Styles */
+* { box-sizing: border-box; }
+body { 
+position: relative;
+color: var(--tbl-txt); 
+}
+
+/* Table Styles */
+table {
+position: relative;
+width: 100%;
+}
+th { 
+text-align: left; 
+vertical-align: bottom;
+border-bottom: 1px solid var(--tbl-border);
+text-transform: uppercase;
+font: medium sans-serif;
+}
+th, td { padding: .4em; }
+
+/* Fold Table */
+table.fold-table {
+background: var(--tbl-bg);
+color: var(--tbl-txt);
+}
+table.fold-table > tbody > tr.view {
+font-family: sans-serif;
+transition: all .3s ease;
+text-transform: uppercase;
+
+}
+table.fold-table > tbody > tr.view td, 
+table.fold-table > tbody > tr.view th {
+cursor: pointer;
+}
+table.fold-table > tbody > tr.view td:first-child, 
+table.fold-table > tbody > tr.view th:first-child { 
+position: relative;
+padding-left: 20px;
+width: 30%;
+}
+table.fold-table > tbody > tr.view td:first-child:before, 
+table.fold-table > tbody > tr.view th:first-child:before {
+position: absolute;
+top: 50%; 
+left: 5px;
+width: 9px; 
+height: 16px;
+margin-top: -8px;
+font: 16px "FontAwesome";
+content: "\f0d7";
+transition: all .3s ease;
+}
+table.fold-table > tbody > tr.view:nth-child(4n-1) { 
+background: var(--tbl-odd-bg); 
+}
+table.fold-table > tbody > tr.view:hover { 
+background: var(--tbl-hover-bg); 
+}
+table.fold-table > tbody > tr.view.open {
+background:#9c9fa1;
+color: #5f4c4c;
+}
+table.fold-table > tbody > tr.view.open td:first-child:before, 
+table.fold-table > tbody > tr.view.open th:first-child:before {
+transform: rotate(-180deg);
+color: var(--tbl-active-txt);
+}
+table.fold-table > tbody > tr.fold {
+display: none;
+}
+table.fold-table > tbody > tr.fold.open { 
+display: table-row; 
+}
+
+/* Fold Content */
+.fold-content {
+padding: .5em;
+}
+.fold-content h3 { 
+margin-top: 0; 
+}
+.fold-content > table {
+background: var(--tbl-bg);
+color: var(--tbl-txt);
+box-shadow: 0 2px 8px 0 rgba(0,0,0,.2);
+}
+.fold-content > table > tbody > tr {
+font-family: serif;
+cursor: pointer;
+}
+.fold-content > table > tbody > tr:nth-child(even) { 
+background: var(--tbl-odd-bg); 
+}
+.fold-content > table > tbody > tr:hover { 
+background: var(--tbl-hover-bg); 
+}
+
+/* Responsive Styles */
+.visible-small { display: none; }
+.visible-big { display: block; }
+@media (max-width: 700px) {
+body { 
+    font-size: .8em; 
+    padding: 0 10px;
+}
+table {
+    th, td { padding: 1em .2em; }
+    th { 
+    vertical-align: bottom; 
+    padding-bottom: 0; 
+    }
+}
+table.small-friendly > thead { 
+    display: none; 
+}
+table.small-friendly > tbody > tr > td, 
+table.small-friendly > tbody > tr > th {
+    position: relative;
+    padding: 0;
+    padding-left: 50%;
+    display: block;
+    /* vertical-align: top; */
+    border-bottom: 1px solid rgba(0,0,0,.05);
+}
+table.small-friendly > tbody > tr > td:before, 
+table.small-friendly > tbody > tr > th:before {
+    position: absolute;
+    top: 0; 
+    left: .5em;
+    max-width: 50%;
+    content: attr(data-th)": ";
+    display: block;
+    font-weight: bold;
+}
+table.small-friendly > tbody > tr > td:first-child { 
+    margin-top: 1em; 
+}
+table.small-friendly > tbody > tr > td:last-child { 
+    margin-bottom: 1em; 
+    border: 0; 
+}
+.visible-small { 
+    display: block; 
+}
+.visible-big { 
+    display: none; 
+}
+}

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly - Weather App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="monthly.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="location">
+           <span style="font-size: large; font:bold;"> Shah Alam, Selangor 28°C </span>
+        </div>
+        <div class="search">
+           <input type="text" placeholder="Address, City or Zip Code">
+           <button type="submit">
+              <i class="fa fa-search"></i>
+           </button>
+        </div>
+     </div>
+     <!-- <div id="overlay"></div> -->
+     <div id="bannerPopup"> WEBSITE APPS SPECIALLY FOR FARMERS!! 
+        <button onclick="closeBannerPopup()" style="margin-left: 35%; color: white; background-color: black; padding: 5px 5px 5px 5px ;">✕</button>
+     </div>
+     <div class="tabs">
+        <button class="tablink" onclick="window.location.href='landing.html'" id="defaultOpen">TODAY</button>
+        <button class="tablink" onclick="window.location.href='hourly.html'" id="defaultOpen">HOURLY</button>
+        <button class="tablink" onclick="window.location.href='day.html'" id="defaultOpen">DAILY</button>
+        <button class="tablink active" onclick="window.location.href='monthly.html'" id="defaultOpen">MONTHLY</button>
+        <button class="tablink" onclick="window.location.href='activities.html'" id="defaultOpen">ACTIVITIES</button>
+     </div>
+
+    <div class="calendar">
+        <div class="month-year">
+            <button class="month-btn" onclick="changeMonth(-1)">&lt;</button>
+            <span id="current-month"></span>
+            <button class="month-btn" onclick="changeMonth(1)">&gt;</button>
+        </div>
+        <table id="calendar-table">
+            <thead>
+                <tr>
+                    <th>SUN</th>
+                    <th>MON</th>
+                    <th>TUE</th>
+                    <th>WED</th>
+                    <th>THU</th>
+                    <th>FRI</th>
+                    <th>SAT</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script>
+        const currentDate = new Date();
+        let selectedDate = null;
+
+        // Sample weather data (mockup, replace with actual API data)
+        const mockWeatherData = {
+            "2024-11-01": { temp: "28°C", icon: "fas fa-sun" },
+            "2024-11-02": { temp: "25°C", icon: "fas fa-cloud" },
+            "2024-11-03": { temp: "30°C", icon: "fas fa-cloud-showers-heavy" },
+        };
+
+        // Render calendar for the current month and year
+        function renderCalendar(month, year) {
+            const calendarTable = document.getElementById("calendar-table").querySelector("tbody");
+            calendarTable.innerHTML = ""; // Clear existing calendar
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            document.getElementById("current-month").textContent = 
+                `${new Date(year, month).toLocaleString("default", { month: "long" })} ${year}`;
+
+            let date = 1;
+            for (let i = 0; i < 6; i++) {
+                const row = document.createElement("tr");
+                for (let j = 0; j < 7; j++) {
+                    const cell = document.createElement("td");
+
+                    if (i === 0 && j < firstDay) {
+                        cell.textContent = "";
+                    } else if (date > daysInMonth) {
+                        cell.textContent = "";
+                    } else {
+                        const fullDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
+                        
+                        // Add the date
+                        const dateElement = document.createElement("div");
+                        dateElement.className = "date";
+                        dateElement.textContent = date;
+                        cell.appendChild(dateElement);
+
+                        // Add the weather info (if available)
+                        const weatherInfo = mockWeatherData[fullDate];
+                        if (weatherInfo) {
+                            const weatherIcon = document.createElement("i");
+                            weatherIcon.className = `weather-icon ${weatherInfo.icon}`;
+                            cell.appendChild(weatherIcon);
+
+                            const weatherTemp = document.createElement("div");
+                            weatherTemp.className = "weather-info";
+                            weatherTemp.textContent = weatherInfo.temp;
+                            cell.appendChild(weatherTemp);
+                        }
+
+                        cell.addEventListener("click", () => selectDate(cell, date, month, year));
+                        date++;
+                    }
+                    row.appendChild(cell);
+                }
+                calendarTable.appendChild(row);
+            }
+        }
+
+        // Handle date selection
+        function selectDate(cell, date, month, year) {
+            if (selectedDate) {
+                selectedDate.classList.remove("selected");
+            }
+            cell.classList.add("selected");
+            selectedDate = cell;
+
+            alert(`Selected date: ${date}-${month + 1}-${year}`);
+        }
+
+        // Change month
+        function changeMonth(offset) {
+            currentDate.setMonth(currentDate.getMonth() + offset);
+            renderCalendar(currentDate.getMonth(), currentDate.getFullYear());
+        }
+
+        // Initialize calendar
+        renderCalendar(currentDate.getMonth(), currentDate.getFullYear());
+    </script>
+</body>
+</html>

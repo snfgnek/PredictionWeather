@@ -1,0 +1,397 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333; /* Dark background color */
+    color: #fff; /* White text */
+  }
+  
+  .header-left {
+    font-size: 14px;
+  }
+  
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between elements */
+  }
+  
+  .search-bar {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* .location-dropdown {
+    padding: 5px 10px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    color: #000000;
+  } */
+  
+  .custom-select {
+    position: relative;
+    font-family: Arial;
+  }
+  
+  .custom-select select {
+    display: none; /*hide original SELECT element: */
+  }
+  
+.location-dropdown {
+    background-color: DodgerBlue;
+  }
+  
+  /* Style the arrow inside the select element: */
+.location-dropdown:after {
+    position: absolute;
+    content: "";
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent;
+  }
+  
+  /* Point the arrow upwards when the select box is open (active): */
+.location-dropdown.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 7px;
+  }
+  
+  /* style the items (options), including the selected item: */
+  .select-items div,.select-selected {
+    color: #ffffff;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+  }
+  
+  /* Style items (options): */
+  .select-items {
+    position: absolute;
+    background-color: DodgerBlue;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+  }
+  
+  /* Hide the items when the select box is closed: */
+  .select-hide {
+    display: none;
+  }
+  
+  .select-items div:hover, .same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .menu-icon {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .top-bar .location {
+    font-size: 18px;
+  }
+  
+  .top-bar input {
+    padding: 5px;
+    font-size: 14px;
+    float: right;
+  }
+  
+  .banner {
+    background-color: yellow;
+    color: black;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+  }
+  
+  .banner span {
+    font-size: 16px;
+  }
+  
+  .close-banner {
+    background: none;
+    border: none;
+    font-size: 20px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: black;
+  }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover {
+    background-color: #111;
+  }
+
+  body.show-popup #popup-banner {
+    display: flex;
+  }
+  body.hide-popup #popup-banner {
+    display: none;
+  }
+ 
+  nav {
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+  }
+  
+  nav .tab {
+    color: white;
+    padding: 15px;
+    flex-grow: 1;
+    border: none;
+    background-color: #333;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  nav .tab:hover {
+    background-color: #555;
+  }
+  
+  main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+    background: linear-gradient(to right, #9ad1f2, #6eb9e8);
+  }
+  
+  .map-container {
+    flex: 1;
+    min-width: 300px;
+    max-width: 600px;
+    margin: 10px;
+  }
+  
+  .body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .weather-container {
+    max-width: 1000px;
+    margin: 10px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+  
+  .border-b {
+    border-bottom: 2px solid #000000; /* Sets a light gray line */
+  }
+
+  .today-summary, .current-weather {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .justify-between {
+    justify-content: space-between;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .hourly-forecast {
+    gap: 10px;
+  }
+  
+  .details-row {
+    display: flex;
+    gap: 15px;
+    font-size: 14px;
+  }
+  
+  .bg-blue-200 {
+    background-color: #e1effe;
+  }  
+  
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+  *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+  }
+  
+  body{
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .main-footer {
+    padding: 70px 0;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #19302E;
+  }
+  
+  .main-footer ul {
+    list-style: none;
+  }
+  
+  .main-footer h1 {
+    font-size: 22px;
+    line-height: 117%;
+    color: #ffffff;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  
+  .main-footer h2 {
+    color: #ffffff;
+    font-weight: 500;
+  }
+  
+  .main-footer ul li a {
+    color: #ffffffcc;
+    text-decoration:none;
+  }
+  
+  footer {
+    background-color: #19302E;
+    border-top: 1px solid #6EB981;
+    font-size: 17px;
+    padding: 15px 5px;
+    color: #ffffff;
+    text-align: center;
+  }
+  
+  footer a {
+    text-decoration: none;
+    color: #ffffff;
+  }
+  
+  .logoinfo p {
+    color: #6EB981;
+    font-size: 17px;
+    margin-top: 5px;
+  }
+  
+  .contact-details {
+    margin-top: 20px;
+  }
+  
+  .contact-details li {
+    list-style: none;
+    margin: 10px 0;
+  }
+  
+  .contact-details li a {
+    text-decoration:none;
+    color: #f1f1f1;
+  }
+  
+  .contact-details .fa {
+    color: #f1f1f1;
+    margin-right: 10px;
+  }
+  
+  .sociallogos{
+    padding:20px 0;
+  }
+  
+  .sociallogos .logobox a{
+    padding:0 10px;
+    text-decoration:none;
+    color:#ffffff;
+    font-size:22px;
+  }
+  
+  .com ul li{
+    padding:5px 0;
+  }
+  
+  @media only screen and (max-width: 749px) {
+    .main-footer {
+      padding:20px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+    }
+      .info{
+        padding:20px 0;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .main-footer {
+      grid-template-columns: 1fr;
+    }
+    .sociallogos{
+      padding:20px 0;
+    }
+    .com{
+      padding:20px 0;
+    } 
+  
+  }
+  

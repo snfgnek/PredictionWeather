@@ -1,0 +1,187 @@
+<html>
+    <head>
+        <title>Index - Weather App</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 
+    </head>
+    <body>
+        <div class="header">
+            <div class="location"> 
+                {% if weather %} 
+                <span style="font-size: large; font:bold;">
+                    {{ weather.name }} , {{ weather.temp_c }}°C / {{ weather.temp_f }}°F 
+                </span> 
+                {% else %} 
+                <span>No weather data available.</span> 
+                {% endif %} 
+            </div>
+            <div class="search">
+                <form action="/home" method="POST" class="text-center">
+                    <input type="text" name="cityName" placeholder="Enter city" class="form-control" required>
+                    <button type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div id="bannerPopupIndex"> WELCOME TO OUR WEATHER SYSTEM !! <button onclick="closeBannerPopupIndex()" style="margin-left: 35%; color: white; background-color: black;">✕</button>
+        </div>
+        <div class="tabs">
+            <button class="tablink active" onclick="window.location.href='/home'" id="defaultOpen">TODAY</button>
+            <button class="tablink" onclick="window.location.href='/hourly'" id="defaultOpen">HOURLY</button>
+            <button class="tablink" onclick="window.location.href='/day'" id="defaultOpen">DAILY</button>
+            <button class="tablink" onclick="window.location.href='/monthly'" id="defaultOpen">MONTHLY</button>
+        </div>
+        <div class="map">
+            <div class="gmap_canvas">
+                <iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=1453&amp;height=353&amp;hl=en&amp;q={{ weather.name }}&amp;t=k&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+            </div>
+        </div>
+        <div class="content">
+            <div class="forecast">
+                <div class="title">
+                    <h2>TODAY </h2>
+                    <h2> {{ weather.date }}</h2>
+                </div>
+                <p style="font-size: large;">{{ weather.condition_text }}</p>
+                <div class="details">
+                    <div class="forecast-container">
+                        <!-- Today Forecast -->
+                        <div class="time today">
+                            <img src="{{ weather.condition_icon }}" alt="Weather icon" />
+                            <p>{{ weather.time }}</p>
+                            <p>{{ weather.temp_c }}°C</p>
+                        </div>
+                        <div class="hourly-forecast">
+                            <h2>Hourly Forecast</h2>
+                            <div class="hourly-container">
+                                {% for hour in weather.hourly %}
+                                <div class="hour-block">
+                                    <img src="{{ hour.icon }}" alt="Weather Icon" />
+                                    <p>{{ hour.time }}</p>
+                                    <p>{{ hour.temp }}°C</p>
+                                    <p>{{ hour.description }}</p>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+            <div class="weather">
+                <h1 style="padding-bottom: 15px; font-size: 50;"> {{ weather.name }} </h1>
+                <h3 style="padding-bottom: 15px;"> {{ weather.day }}  </h3>
+                <div class="temp"> {{ weather.temp_c }}°C / {{ weather.temp_f }}°F </div>
+                <h4 style="color:darkblue; padding-top: 20px;"> MIN : {{ weather.temp_min }}°C , MAX : {{ weather.temp_max }}°C </h4>
+                <div class="details">
+                    <div>
+                        <i class="fas fa-cloud"></i>
+                        <p> {{ weather.cloud_coverage}} %</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-wind"></i>
+                        <p> {{ weather.wind_speed_kph }} kph</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-compass"></i>
+                        <p> {{ weather.wind_dir }} °</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-cloud-rain"></i>
+                        <p> {{ weather.rain_1h_mm}} mm </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div>
+                <h3> Basic Information </h3>
+                <ul>
+                    <li> Copyright Notice: © 2024 WeatherWise. All Rights Reserved. </li>
+                </ul>
+            </div>
+            <div>
+                <h3> Navigation Links </h3>
+                <ul>
+                    <a href="hourly.html">Hourly</a>
+                    <li>
+                        <a href="day.html">Daily</a>
+                    </li>
+                    <li>
+                        <a href="monthly.html">Monthly</a>
+                    </li>
+                    <li>
+                        <a href="activities.html">Activites</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h3> Company Information </h3>
+                <ul>
+                    <li> Contact us at support@weatherwise.com </li>
+                </ul>
+            </div>
+            <div>
+                <h3> Social Media Links </h3>
+                <ul>
+                    <li>
+                        <i class="fab fa-facebook-f"></i> Facebook
+                    </li>
+                    <li>
+                        <i class="fab fa-twitter"></i> Twitter
+                    </li>
+                    <li>
+                        <i class="fab fa-instagram"></i> Instagram
+                    </li>
+                    <li>
+                        <i class="fab fa-linkedin-in"></i> LinkedIn
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="scroll-up">
+            <i class="fas fa-arrow-up"></i>
+        </div>
+
+        <script>
+      // Function to show the banner popup
+      function showBannerPopupIndex() {
+         document.getElementById("bannerPopupIndex").style.display = "block";
+         document.getElementById("overlay").style.display = "block";
+      }
+
+      // Function to close the banner popup
+      function closeBannerPopupIndex() {
+         document.getElementById("bannerPopupIndex").style.display = "none";
+         document.getElementById("overlay").style.display = "none";
+      }
+
+      // Automatically show the popup when the page loads
+      window.onload = function () {
+         showBannerPopup();
+      };
+      document.addEventListener("DOMContentLoaded", function () {
+            const scrollUpButton = document.querySelector('.scroll-up');
+
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 200) {
+                    scrollUpButton.style.display = 'block';
+                } else {
+                    scrollUpButton.style.display = 'none';
+                }
+            });
+
+            scrollUpButton.addEventListener('click', function () {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,31 @@
+<div class="container">
+    <h1>Weather Forecast for {{ weather.name }}</h1>
+        <div class="weather-info">
+            <div class="weather-details">
+                <h2>Current Weather</h2>
+                <p><strong>Temperature:</strong> {{ weather.temp_c }}°C</p>
+                <p><strong>Feels Like:</strong> {{ weather.feelslike_c }}°C</p>
+                <p><strong>Humidity:</strong> {{ weather.humidity }}%</p>
+                <p><strong>Wind Speed:</strong> {{ weather.wind_speed_kph }} km/h</p>
+                <p><strong>Cloud Coverage:</strong> {{ weather.cloud_coverage }}%</p>
+                <p><strong>Condition:</strong> {{ weather.condition_text }}</p>
+                <img src="{{ weather.condition_icon }}" alt="Condition Icon">
+            </div>
+
+            <div class="forecast">
+                <h3>1-Hour Forecast</h3>
+                {% if hourly_forecast %}
+                    {% for forecast in hourly_forecast %}
+                        <div class="hourly-item">
+                            <span><strong>{{ forecast.time }}</strong></span>
+                            <img src="{{ forecast.predicted_icon }}" alt="Forecast Icon">
+                            <span>{{ forecast.temp }}°C</span>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No hourly forecast available.</p>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+</div>
