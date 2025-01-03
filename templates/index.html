@@ -47,28 +47,29 @@
                     <h2>TODAY </h2>
                     <h2> {{ weather.date }}</h2>
                 </div>
-                <p style="font-size: large;">{{ weather.condition_text }}</p>
                 <div class="details">
                     <div class="forecast-container">
-                        <!-- Today Forecast -->
+                        <div class="hourly-container">
+                            <!-- Today Forecast -->
                         <div class="time today">
-                            <img src="{{ weather.condition_icon }}" alt="Weather icon" />
-                            <p>{{ weather.time }}</p>
+                            <img src="{{ weather.condition_icon }}" alt="Weather icon" style="height: 60px; width: 60px; padding-top: 30px;"/>
+                            <p>NOW</p>
                             <p>{{ weather.temp_c }}°C</p>
+                            <p>{{ weather.condition_text }}</p>
                         </div>
-                        <div class="hourly-forecast">
-                            <h2>Hourly Forecast</h2>
-                            <div class="hourly-container">
+                            {% if weather.hourly %}
                                 {% for hour in weather.hourly %}
                                 <div class="hour-block">
-                                    <img src="{{ hour.icon }}" alt="Weather Icon" />
+                                    <img src="{{ hour.icon }}" alt="Weather Icon" style="height: 60px; width: 60px; padding-top: 30px;"/>
                                     <p>{{ hour.time }}</p>
                                     <p>{{ hour.temp }}°C</p>
                                     <p>{{ hour.description }}</p>
                                 </div>
                                 {% endfor %}
-                            </div>
-                        </div>                        
+                            {% else %}
+                                <p>No hourly forecast available.</p>
+                            {% endif %}
+                        </div>                  
                     </div>
                 </div>
             </div>
