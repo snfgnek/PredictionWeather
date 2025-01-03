@@ -84,17 +84,30 @@ def home():
         current_time = datetime.now(local_tz)
         print("Local Time:", current_time)
         next_full_hour = (current_time + timedelta(hours=1)).replace(minute=0, second=0, microsecond=0)
-        
+
+        description_mapping = {
+            "clear sky": "0.png", 
+            "clear night": "1.png", 
+            "few clouds": "2.png", 
+            "broken clouds": "5.png",
+            "scattered clouds": "4.png", 
+            "overcast clouds": "3.png", 
+            "light rain": "6.png", 
+            "rain": "6.png", 
+            "thunderstorm": "7.png", 
+            "thunderstorm": "8.png", #night
+        }
+
         hourly_data = [
         {
-        "time": datetime.fromtimestamp(hour['dt'], local_tz).strftime('%H:%M'),
-        "temp": hour['main']['temp'],
-        "description": hour['weather'][0]['description'],
-        "icon": f"http://openweathermap.org/img/wn/{hour['weather'][0]['icon']}@2x.png"
+            "time": datetime.fromtimestamp(hour['dt'], local_tz).strftime('%H:%M'),
+            "temp": hour['main']['temp'],
+            "description": hour['weather'][0]['description'],
+            "icon": url_for('static', filename=f"icons/{description_mapping.get(hour['weather'][0]['description'].lower(), '0.png')}")
         }
-        for hour in forecast_data if next_full_hour <= datetime.fromtimestamp(hour['dt'], local_tz) < next_full_hour + timedelta(hours=5)
-        ]
-
+        for hour in forecast_data
+        if next_full_hour <= datetime.fromtimestamp(hour['dt'], local_tz) < next_full_hour + timedelta(hours=5)
+    ]
 
         # Prepare the weather data for rendering
         weather_data = {
@@ -119,7 +132,7 @@ def home():
             "gust_kph": json_data['wind'].get('gust', 0) * 3.6,  # Convert m/s to kph
             "gust_mph": json_data['wind'].get('gust', 0) * 2.237,  # Convert m/s to mph
             "condition_text": json_data['weather'][0]['description'],
-            "condition_icon": f"http://openweathermap.org/img/wn/{json_data['weather'][0]['icon']}@2x.png",
+            "condition_icon": url_for('static', filename=f"icons/{description_mapping.get(json_data['weather'][0]['description'].lower(), 'default.png')}"),
             "rain_1h_mm": json_data.get('rain', {}).get('1h', 0),  # Rain in the last 1 hour (mm)
             "cloud_coverage": json_data['clouds']['all'],  # Cloud coverage percentage
             "country": json_data['sys']['country'],
@@ -431,3 +444,7 @@ if __name__ == '__main__':
 # @app.route('/monthly')
 # def monthly():
 #     return render_template('monthly.html', weather=None) 
+
+# @app.route('/activities')
+# def monthly():
+#     return render_template('activities.html', weather=None) 
