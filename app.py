@@ -10,6 +10,7 @@ import pytz
 API_KEY = "a9902202138d0bf59b5aae5e0806b2ea"
 API_URL = "https://api.openweathermap.org/data/2.5/weather"
 FORECAST_API_URL = "https://pro.openweathermap.org/data/2.5/forecast/hourly"
+GEOCODING_API_URL = "http://api.openweathermap.org/geo/1.0/direct"
 
 app = Flask(__name__)
 app.secret_key = 'hudacantik'
@@ -430,8 +431,3 @@ if __name__ == '__main__':
 # @app.route('/monthly')
 # def monthly():
 #     return render_template('monthly.html', weather=None) 
-
-# @app.route('/activities')
-# def monthly():
-#     return render_template('activities.html', weather=None) 
-
